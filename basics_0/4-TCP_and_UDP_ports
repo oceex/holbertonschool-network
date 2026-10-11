@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# prining the lesnting ports
+ss -tuln

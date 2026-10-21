@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="780" viewBox="0 0 1400 780" font-family="DejaVu Sans, Arial, sans-serif">
+  <defs>
+    <marker id="arrGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555555"/>
+    </marker>
+    <marker id="arrBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1a5fb4"/>
+    </marker>
+    <marker id="arrGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1b8a3a"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="780" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="700" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#222222">What happens when you type https://www.google.com and press Enter</text>
+  <text x="700" y="64" text-anchor="middle" font-size="14" fill="#666666">A typical web stack. The exact internals of Google's infrastructure are not public.</text>
+
+  <!-- DNS resolution -->
+  <rect x="30" y="100" width="290" height="110" rx="8" fill="#eaf2fb" stroke="#1a5fb4" stroke-width="2"/>
+  <text x="175" y="130" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a5fb4">DNS resolution</text>
+  <text x="175" y="154" text-anchor="middle" font-size="13" fill="#222222">Recursive resolver asks the root,</text>
+  <text x="175" y="172" text-anchor="middle" font-size="13" fill="#222222">the .com servers, then the</text>
+  <text x="175" y="190" text-anchor="middle" font-size="13" fill="#222222">google.com name servers</text>
+
+  <!-- Client -->
+  <rect x="30" y="350" width="170" height="100" rx="8" fill="#fff6e5" stroke="#b7791f" stroke-width="2"/>
+  <text x="115" y="383" text-anchor="middle" font-size="16" font-weight="bold" fill="#8a5a0a">Client</text>
+  <text x="115" y="406" text-anchor="middle" font-size="13" fill="#222222">Web browser</text>
+  <text x="115" y="426" text-anchor="middle" font-size="12" fill="#222222">https://www.google.com</text>
+
+  <!-- DNS arrows (client to resolver and back) -->
+  <line x1="60" y1="348" x2="60" y2="214" stroke="#1a5fb4" stroke-width="2.5" marker-end="url(#arrBlue)"/>
+  <line x1="100" y1="212" x2="100" y2="346" stroke="#1a5fb4" stroke-width="2.5" marker-end="url(#arrBlue)"/>
+  <text x="125" y="265" font-size="13" fill="#1a5fb4">1. Where is www.google.com?</text>
+  <text x="125" y="310" font-size="13" fill="#1a5fb4">2. IP is 203.0.113.10 (example)</text>
+
+  <!-- Firewall -->
+  <rect x="330" y="350" width="160" height="100" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="2"/>
+  <text x="410" y="383" text-anchor="middle" font-size="16" font-weight="bold" fill="#c0392b">Firewall</text>
+  <text x="410" y="406" text-anchor="middle" font-size="13" fill="#222222">allows TCP 443,</text>
+  <text x="410" y="426" text-anchor="middle" font-size="13" fill="#222222">blocks the rest</text>
+
+  <!-- Load balancer -->
+  <rect x="620" y="350" width="160" height="100" rx="8" fill="#f1ecfa" stroke="#6b3fa0" stroke-width="2"/>
+  <text x="700" y="383" text-anchor="middle" font-size="16" font-weight="bold" fill="#6b3fa0">Load balancer</text>
+  <text x="700" y="406" text-anchor="middle" font-size="13" fill="#222222">spreads the requests,</text>
+  <text x="700" y="426" text-anchor="middle" font-size="13" fill="#222222">TLS ends here</text>
+  <text x="700" y="472" text-anchor="middle" font-size="12" fill="#555555">public IP 203.0.113.10, port 443</text>
+
+  <!-- Main request path: client to firewall -->
+  <line x1="202" y1="400" x2="328" y2="400" stroke="#1b8a3a" stroke-width="3.5" marker-end="url(#arrGreen)"/>
+  <text x="265" y="368" text-anchor="middle" font-size="12" fill="#1b8a3a">3. HTTPS request</text>
+  <text x="265" y="384" text-anchor="middle" font-size="12" fill="#1b8a3a">to IP:443</text>
+  <rect x="210" y="412" width="110" height="18" rx="9" fill="#e6f4ea" stroke="#1b8a3a"/>
+  <text x="265" y="425" text-anchor="middle" font-size="10" font-weight="bold" fill="#1b8a3a">ENCRYPTED (TLS)</text>
+
+  <!-- Firewall to load balancer -->
+  <line x1="492" y1="400" x2="618" y2="400" stroke="#1b8a3a" stroke-width="3.5" marker-end="url(#arrGreen)"/>
+  <text x="555" y="368" text-anchor="middle" font-size="12" fill="#1b8a3a">4. Firewall lets</text>
+  <text x="555" y="384" text-anchor="middle" font-size="12" fill="#1b8a3a">port 443 through</text>
+  <rect x="500" y="412" width="110" height="18" rx="9" fill="#e6f4ea" stroke="#1b8a3a"/>
+  <text x="555" y="425" text-anchor="middle" font-size="10" font-weight="bold" fill="#1b8a3a">ENCRYPTED (TLS)</text>
+
+  <!-- Web servers -->
+  <rect x="910" y="270" width="200" height="100" rx="8" fill="#e8f6ef" stroke="#1e8449" stroke-width="2"/>
+  <text x="1010" y="302" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e8449">Web server A</text>
+  <text x="1010" y="324" text-anchor="middle" font-size="13" fill="#222222">Nginx</text>
+  <text x="1010" y="344" text-anchor="middle" font-size="13" fill="#222222">serves the web page</text>
+
+  <rect x="910" y="430" width="200" height="100" rx="8" fill="#e8f6ef" stroke="#1e8449" stroke-width="2"/>
+  <text x="1010" y="462" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e8449">Web server B</text>
+  <text x="1010" y="484" text-anchor="middle" font-size="13" fill="#222222">Nginx</text>
+  <text x="1010" y="504" text-anchor="middle" font-size="13" fill="#222222">serves the web page</text>
+
+  <!-- Load balancer to web servers -->
+  <line x1="782" y1="385" x2="908" y2="325" stroke="#555555" stroke-width="2.5" marker-end="url(#arrGray)"/>
+  <line x1="782" y1="415" x2="908" y2="475" stroke="#555555" stroke-width="2.5" marker-end="url(#arrGray)"/>
+  <text x="845" y="283" text-anchor="middle" font-size="12" fill="#444444">5. LB picks one</text>
+  <text x="845" y="299" text-anchor="middle" font-size="12" fill="#444444">(round robin)</text>
+
+  <!-- Application server -->
+  <rect x="1210" y="350" width="170" height="100" rx="8" fill="#fff0e0" stroke="#d35400" stroke-width="2"/>
+  <text x="1295" y="381" text-anchor="middle" font-size="15" font-weight="bold" fill="#d35400">Application server</text>
+  <text x="1295" y="404" text-anchor="middle" font-size="13" fill="#222222">runs the code and</text>
+  <text x="1295" y="424" text-anchor="middle" font-size="13" fill="#222222">generates the page</text>
+
+  <!-- Web servers to application server -->
+  <line x1="1112" y1="325" x2="1208" y2="383" stroke="#555555" stroke-width="2.5" marker-end="url(#arrGray)"/>
+  <line x1="1112" y1="475" x2="1208" y2="417" stroke="#555555" stroke-width="2.5" marker-end="url(#arrGray)"/>
+  <text x="1160" y="283" text-anchor="middle" font-size="12" fill="#444444">6. dynamic</text>
+  <text x="1160" y="299" text-anchor="middle" font-size="12" fill="#444444">request</text>
+
+  <!-- Database -->
+  <rect x="1210" y="620" width="170" height="90" rx="8" fill="#e8eaf6" stroke="#303f9f" stroke-width="2"/>
+  <text x="1295" y="653" text-anchor="middle" font-size="16" font-weight="bold" fill="#303f9f">Database</text>
+  <text x="1295" y="675" text-anchor="middle" font-size="13" fill="#222222">MySQL</text>
+  <text x="1295" y="693" text-anchor="middle" font-size="12" fill="#222222">stores the data</text>
+
+  <!-- App server and database -->
+  <line x1="1262" y1="452" x2="1262" y2="618" stroke="#555555" stroke-width="2.5" marker-end="url(#arrGray)"/>
+  <line x1="1328" y1="618" x2="1328" y2="452" stroke="#555555" stroke-width="2.5" marker-end="url(#arrGray)"/>
+  <text x="1252" y="530" text-anchor="end" font-size="12" fill="#444444">7. SQL query</text>
+  <text x="1338" y="525" font-size="12" fill="#444444">8. data</text>
+  <text x="1338" y="541" font-size="12" fill="#444444">(rows)</text>
+
+  <!-- Return path: web page back to the browser -->
+  <polyline points="1010,532 1010,600 115,600 115,452" fill="none" stroke="#1b8a3a" stroke-width="3" stroke-dasharray="10,6" marker-end="url(#arrGreen)"/>
+  <text x="560" y="628" text-anchor="middle" font-size="13" fill="#1b8a3a">9. The application server builds the HTML page and hands it to the web server.</text>
+  <text x="560" y="648" text-anchor="middle" font-size="13" fill="#1b8a3a">10. The web server serves the page back to the browser through the load balancer</text>
+  <text x="560" y="666" text-anchor="middle" font-size="13" fill="#1b8a3a">and the firewall, encrypted with TLS.</text>
+
+  <!-- Legend -->
+  <line x1="30" y1="718" x2="70" y2="718" stroke="#1a5fb4" stroke-width="2.5"/>
+  <text x="78" y="722" font-size="12" fill="#333333">DNS lookup</text>
+  <line x1="170" y1="718" x2="210" y2="718" stroke="#1b8a3a" stroke-width="3.5"/>
+  <text x="218" y="722" font-size="12" fill="#333333">Encrypted HTTPS traffic</text>
+  <line x1="390" y1="718" x2="430" y2="718" stroke="#555555" stroke-width="2.5"/>
+  <text x="438" y="722" font-size="12" fill="#333333">Private network inside the data center</text>
+  <text x="30" y="748" font-size="12" fill="#666666">TLS is ended at the load balancer, so traffic behind it travels as plain HTTP on the private network. 203.0.113.10 is a documentation example IP, not Google's real address.</text>
+</svg>
